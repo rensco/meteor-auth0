@@ -7,6 +7,29 @@ if (Meteor.isClient) {
             // returns.
             self.lock = new _Auth0Lock(res.AUTH0_CLIENTID, res.AUTH0_DOMAIN);
 
+            var hash = self.lock.parseHash();
+            if (hash) {
+                //Login is redirect. Profile should be handled here.
+                if (hash.error) {
+                    console.log("There was an error logging in... ", hash.error);
+                } else {
+                    self.lock.getProfile(hash.id_token, function(err, profile, token) {
+                        if (err) {
+                            console.log('Cannot get user :(', err);
+                            return;
+                        }
+
+                        Accounts.callLoginMethod({
+                            methodArguments: [{
+                                auth0: {
+                                    profile: profile,
+                                    token  : token
+                                }
+                            }]
+                        });
+                    });
+                }
+            }
 
             // Replace lock functions that need special handling by Meteor and its accounts system
             var show = self.lock.show;
@@ -62,16 +85,15 @@ if (Meteor.isClient) {
     // Adds our callback wrapper to the arguments array
     function _addAccountsCallback(arguments) {
         if (arguments.length === 0) {
-            // No options or a callback
-            [].push.call(arguments, _getCallbackWrapper());
+            // This means redirect, so there is no need to do a callback.
         } else if (arguments.length === 1) {
             // Just one argument. Could be an options object or a callback function.
             if (_.isFunction(arguments[0])) {
                 // It's a function. Gets replaced with our callback wrapper.
                 arguments[0] = _getCallbackWrapper(arguments[0]);
             } else {
-                // It's not a function. Our callback wrapper is added to the arguments array.
-                [].push.call(arguments, _getCallbackWrapper());
+                // It's not a function. The options object will get to our lock instance.
+                // This means redirect, so there is no need to do a callback.
             }
         } else if (arguments.length > 1) {
             // More than one argument. Usual case when an options object and a callback is passed to show()
