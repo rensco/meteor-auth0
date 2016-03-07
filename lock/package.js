@@ -9,7 +9,7 @@ Package.describe({
 });
 
 Npm.depends({
-    "auth0-lock": "8.2.3",
+    "auth0-lock": "9.0.0",
     "brfs"      : "1.4.3",
     "ejsify"    : "0.1.0",
     "packageify": "0.2.0"
