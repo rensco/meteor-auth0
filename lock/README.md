@@ -18,7 +18,7 @@ Lock makes it easy to integrate SSO in your app. You won't have to worry about:
 
 ## Requirements
 
-You'll need Meteor **1.2.1**, so please run `meteor update` in your project folder.
+You'll need Meteor **1.2.1**.
 
 ## Install
 
