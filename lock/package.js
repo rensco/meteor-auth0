@@ -2,7 +2,7 @@
 
 Package.describe({
     name         : 'auth0:lock',
-    version      : '0.4.1',
+    version      : '0.5.0',
     summary      : 'Auth0 Lock for Meteor',
     git          : 'https://github.com/auth0/meteor-auth0.git',
     documentation: 'README.md'
