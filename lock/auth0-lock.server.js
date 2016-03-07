@@ -8,9 +8,6 @@ if (Meteor.isServer) {
         return __meteor_bootstrap__.serverDir.split('/.meteor')[0] + '/';
     };
 
-    // Load the .env file
-    Npm.require('dotenv').load({path: _getAppPath() + '.env'});
-
     // Register the Auth0 login handler for Meteor.
     Accounts.registerLoginHandler(function (options) {
         if (!options.auth0)
