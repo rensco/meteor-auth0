@@ -2,18 +2,17 @@
 
 Package.describe({
     name         : 'auth0:lock',
-    version      : '0.4.1',
+    version      : '0.5.0',
     summary      : 'Auth0 Lock for Meteor',
     git          : 'https://github.com/auth0/meteor-auth0.git',
     documentation: 'README.md'
 });
 
 Npm.depends({
-    "auth0-lock": "8.2.3",
+    "auth0-lock": "9.0.0",
     "brfs"      : "1.4.3",
     "ejsify"    : "0.1.0",
-    "packageify": "0.2.0",
-    "dotenv"    : "2.0.0"
+    "packageify": "0.2.0"
 });
 
 Package.onUse(function (api) {

@@ -8,9 +8,6 @@ if (Meteor.isServer) {
         return __meteor_bootstrap__.serverDir.split('/.meteor')[0] + '/';
     };
 
-    // Load the .env file
-    Npm.require('dotenv').load({path: _getAppPath() + '.env'});
-
     // Register the Auth0 login handler for Meteor.
     Accounts.registerLoginHandler(function (options) {
         if (!options.auth0)
@@ -56,8 +53,8 @@ if (Meteor.isServer) {
         // Gets called from the Meteor.startup function on the client.
         'getAuth0Attributes': function () {
             return {
-                AUTH0_CLIENTID: process.env.AUTH0_CLIENT_ID,
-                AUTH0_DOMAIN  : process.env.AUTH0_DOMAIN
+                AUTH0_CLIENTID: Meteor.settings.private.AUTH0_CLIENT_ID,
+                AUTH0_DOMAIN  : Meteor.settings.private.AUTH0_DOMAIN
             };
         }
     });
