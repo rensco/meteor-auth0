@@ -97,7 +97,7 @@ if (Meteor.isClient) {
             }
         } else if (arguments.length > 1) {
             // More than one argument. Usual case when an options object and a callback is passed to show()
-            for (var i = 0; i++; i < arguments.length) {
+            for (var i = 0; i < arguments.length; i++) {
                 if (_.isFunction(arguments[i])) {
                     // We found the callback function. Gets replaced with our callback wrapper and we are done.
                     arguments[i] = _getCallbackWrapper(arguments[i]);
